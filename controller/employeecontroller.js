@@ -1,12 +1,12 @@
 import { Employee } from "../models/employeemodel.js";
 
-// CreateEmployee
+
 
 export const createemployee = async (req, res) => {
   try {
     const data = req.body;
 
-    // ❌ अगर empty है
+    
     if (!data || (Array.isArray(data) && data.length === 0)) {
       return res.status(400).json({
         status: false,
@@ -14,7 +14,7 @@ export const createemployee = async (req, res) => {
       });
     }
 
-    // ✅ अगर array आया (50 employees)
+  
     if (Array.isArray(data)) {
       const employees = await Employee.insertMany(data);
 
@@ -26,7 +26,7 @@ export const createemployee = async (req, res) => {
       });
     }
 
-    // ✅ अगर single object आया
+    
     const { name, age, email, department, salary } = data;
 
     if (!name || !age || !email || !department || !salary) {
@@ -61,7 +61,7 @@ export const getAllEmployee = async (req, res) => {
     page = parseInt(page) || 1;
     limit = parseInt(limit) || 5;
 
-    // Safety checks
+
     if (page < 1) page = 1;
     if (limit < 1) limit = 5;
     if (limit > 50) limit = 50;
